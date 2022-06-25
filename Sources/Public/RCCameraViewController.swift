@@ -86,6 +86,7 @@ public extension RCCameraViewController {
     cameraView.layer.addSublayer(maskLayer)
     cameraView.layer.addSublayer(circleLayer)
     configureCancelButton()
+    configureLabel()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -118,7 +119,22 @@ public extension RCCameraViewController {
 
 //MARK: Private methods
 extension RCCameraViewController {
-  
+ 
+    private func configureLabel() {
+        let titleLabel = UILabel()
+        titleLabel.text = "Scan BeyeoCode"
+        titleLabel.font = .systemFont(ofSize: 20, weight: .semibold)
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = .white
+        
+        let radius = (min(view.bounds.width, view.bounds.height) * 0.9 / 2) + 50
+        
+        view.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo: view.layoutMarginsGuide.centerYAnchor, constant: -radius).isActive = true
+    }
+    
   private func configureCancelButton() {
     let cancelButton = UIButton(type: .custom)
     cancelButton.addTarget(self, action: #selector(cancelPressed), for: .touchUpInside)
